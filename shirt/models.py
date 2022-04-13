@@ -32,6 +32,7 @@ class Shirt(models.Model):
         shirt_price = models.DecimalField(max_digits=5, decimal_places=2)
         shirt_color = models.CharField(max_length=10, choices=ColorChoices, blank=False, null=False)
         shirt_size = models.CharField(max_length=2, choices=SizeChoices, blank=False, null=False)
+        stock = models.IntegerField(default=0)
 
         def __str__(self):
             return self.shirt_name

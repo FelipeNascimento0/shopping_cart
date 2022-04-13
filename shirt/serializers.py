@@ -1,4 +1,5 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField, CharField
+from email.policy import default
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, CharField, HiddenField, CurrentUserDefault, ValidationError
 from shirt.models import Shirt, Purchase, PurchaseItems
 from numpy import source
 
@@ -41,8 +42,16 @@ class CreateUpdateItemsSerializer(ModelSerializer):
         model = PurchaseItems
         fields = ('shirt','quantity')
 
+    def validate(self, data):
+        if data['quantity'] > data['shirt'].stock:
+            raise ValidationError({
+                'stock':'Ordered quantity not available in stock'
+            })
+        return data
+
 class CreateUpdatePurchaseSerializer(ModelSerializer):
     items = CreateUpdateItemsSerializer(many=True)
+    user = HiddenField(default=CurrentUserDefault())
     class Meta:
         model = Purchase
         fields = ('user','items')
