@@ -1,7 +1,9 @@
 asgiref==3.5.0
 attrs==21.4.0
+dj-database-url==0.5.0
 Django==4.0.2
 django-cors-headers==3.11.0
+django-heroku==0.3.1
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.1.0
 drf-spectacular==0.22.0
@@ -10,6 +12,7 @@ inflection==0.5.1
 jsonschema==4.4.0
 numpy==1.22.3
 postgres==4.0
+psycopg2==2.9.3
 psycopg2-binary==2.9.3
 psycopg2-pool==1.1
 Pygments==2.11.2
